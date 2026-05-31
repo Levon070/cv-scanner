@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Scanner - Match je CV met vacatures</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CV Scanner</h1>
+            <p class="subtitle">Ontdek hoe goed je CV matcht met vacatures</p>
+            <div class="usage-counter">
+                <span id="usage-info">Laden...</span>
+            </div>
+        </header>
+
+        <main>
+            <form id="scan-form" class="scan-form">
+                <div class="input-group">
+                    <label for="cv-text">Plak hier je CV tekst:</label>
+                    <textarea 
+                        id="cv-text" 
+                        name="cvText" 
+                        placeholder="Plak hier de volledige tekst van je CV..."
+                        required
+                        minlength="50"
+                    ></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="job-text">Plak hier de vacaturetekst:</label>
+                    <textarea 
+                        id="job-text" 
+                        name="jobText" 
+                        placeholder="Plak hier de volledige vacaturetekst..."
+                        required
+                        minlength="50"
+                    ></textarea>
+                </div>
+
+                <button type="submit" id="scan-button" class="scan-button">
+                    <span class="button-text">Analyseer Match</span>
+                    <div class="loading-spinner" style="display: none;"></div>
+                </button>
+            </form>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="payment-prompt" class="payment-prompt" style="display: none;">
+                <h3>Gratis analyses gebruikt</h3>
+                <p>Je hebt je 3 gratis analyses gebruikt. Upgrade voor onbeperkte toegang!</p>
+                <button id="upgrade-button" class="upgrade-button">Upgrade nu - €9,99</button>
+            </div>
+
+            <div id="results" class="results" style="display: none;">
+                <h2>Match Resultaat</h2>
+                
+                <div class="score-section">
+                    <div class="score-circle">
+                        <div class="score-number" id="score-number">-</div>
+                        <div class="score-label">Match Score</div>
+                    </div>
+                </div>
+
+                <div class="analysis-sections">
+                    <div class="analysis-section">
+                        <h3>Skills Match</h3>
+                        <p id="skills-analysis"></p>
+                    </div>
+
+                    <div class="analysis-section">
+                        <h3>Ervaring Match</h3>
+                        <p id="experience-analysis"></p>
+                    </div>
+
+                    <div class="analysis-section">
+                        <h3>Opleiding Match</h3>
+                        <p id="education-analysis"></p>
+                    </div>
+
+                    <div class="analysis-section">
+                        <h3>Overige Punten</h3>
+                        <p id="other-analysis"></p>
+                    </div>
+
+                    <div class="analysis-section">
+                        <h3>🟢 Sterke Punten</h3>
+                        <ul id="strong-points"></ul>
+                    </div>
+
+                    <div class="analysis-section">
+                        <h3>🔸 Verbeterpunten</h3>
+                        <ul id="improvement-points"></ul>
+                    </div>
+                </div>
+
+                <button id="new-analysis" class="secondary-button">Nieuwe Analyse</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 CV Scanner. Werkt op Windows met Node.js 20+</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
