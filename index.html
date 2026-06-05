@@ -1,19 +1,275 @@
-<!DOCTYPE html>
-<html lang="nl">
+<!doctype html>
+<html lang="nl" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <title>CV Scanner - Match jouw CV met vacatures in seconden</title>
-  <meta name="description" content="Weet direct hoe goed jouw CV past bij een vacature. AI-analyse geeft je een match-score van 0-100 met concrete feedback. 3x gratis!">
-  <meta name="keywords" content="CV scanner, vacature matching, CV analyse, solliciteren, job matching">
-  <meta property="og:title" content="CV Scanner - Perfecte Match voor jouw Droombaan">
-  <meta property="og:description" content="Stop met gissen. Scan je CV tegen vacatures en krijg direct een match-score met uitleg over skills, ervaring en opleiding.">
-  <style>/* inline CSS placeholder */</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV Scanner — Weet in seconden hoe goed jouw CV matcht</title>
+  <meta name="description" content="CV Scanner vergelijkt jouw CV met elke vacature en geeft een concrete match-score van 0 tot 100. Eerste 3 analyses gratis, geen account nodig." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CV Scanner — match-score van 0 tot 100" />
+  <meta property="og:description" content="Vergelijk jouw CV met elke vacature en krijg direct een concrete match-score." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://levon070.github.io/cv-scanner/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: "#0a0a0f",
+            accent: "#4f46e5",
+            "accent-soft": "#6366f1",
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root { color-scheme: dark; }
+    html, body { background: #0a0a0f; }
+    body { font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* word-mask voor de hero split-reveal */
+    .word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.12em; }
+    .word { display: inline-block; will-change: transform, opacity; }
+
+    /* ambient glow achter de hero */
+    .glow {
+      position: absolute; border-radius: 9999px; filter: blur(120px);
+      opacity: 0.45; pointer-events: none;
+    }
+
+    /* subtiele grid-textuur */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    }
+
+    .reveal { will-change: transform, opacity; }
+    .card-glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+    }
+    .card-glass:hover { border-color: rgba(99,102,241,0.5); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .word, .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
 </head>
-<body>
-  <h1>Weet in seconden hoe goed jouw CV matcht met elke vacature.</h1>
-  <p>CV Scanner vergelijkt jouw CV met een vacaturetekst en geeft je een concrete match-score van 0 tot 100, inclusief uitleg over skills, ervaring en opleiding. Stop met gissen en solliciteer alleen waar je écht kans maakt.</p>
-  <ul><li>Directe match-score op basis van AI-analyse van skills, ervaring en opleiding</li><li>Heldere onderbouwing zodat je precies weet wat je sterk maakt of mist</li><li>Geen account aanmaken — plak je teksten in en krijg meteen resultaat</li><li>Eerste 3 analyses volledig gratis, daarna betaal je alleen wat je gebruikt</li></ul>
-  <a href="#">Scan mijn CV nu</a>
-  <p>De eerste 3 scans zijn gratis; daarna betaal je eenmalig voor onbeperkte toegang.</p>
+
+<body class="bg-base text-white antialiased selection:bg-accent/40">
+
+  <!-- NAV -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <div class="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between">
+      <a href="#" class="font-extrabold tracking-tight text-lg">CV<span class="text-accent-soft">Scanner</span></a>
+      <a href="#pricing" class="text-sm font-medium text-white/70 hover:text-white transition">Prijzen</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <div class="glow" style="width:600px;height:600px;background:#4f46e5;top:-180px;left:50%;transform:translateX(-50%);"></div>
+    <div class="glow" style="width:420px;height:420px;background:#1e1b4b;bottom:-120px;right:-80px;"></div>
+    <div class="absolute inset-0 grid-bg"></div>
+
+    <div class="relative z-10 mx-auto max-w-6xl px-6 w-full text-center">
+      <p id="hero-eyebrow" class="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/70">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+        AI-gedreven CV-analyse
+      </p>
+
+      <h1 class="mx-auto max-w-4xl font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
+        <span class="word-mask"><span class="word">Weet</span></span>
+        <span class="word-mask"><span class="word">in</span></span>
+        <span class="word-mask"><span class="word">seconden</span></span>
+        <span class="word-mask"><span class="word">hoe</span></span>
+        <span class="word-mask"><span class="word">goed</span></span>
+        <span class="word-mask"><span class="word">jouw</span></span>
+        <span class="word-mask"><span class="word">CV</span></span>
+        <span class="word-mask"><span class="word bg-gradient-to-r from-accent-soft to-indigo-300 bg-clip-text text-transparent">matcht</span></span>
+      </h1>
+
+      <p id="hero-sub" class="reveal mx-auto mt-7 max-w-2xl text-lg sm:text-xl text-white/60">
+        CV Scanner vergelijkt jouw CV met elke vacature en geeft een concrete match-score van 0 tot 100.
+      </p>
+
+      <div id="hero-cta" class="reveal mt-10 flex items-center justify-center gap-4">
+        <a href="#" class="cta-btn group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold shadow-lg shadow-accent/30 hover:bg-accent-soft transition">
+          Start nu — €19/maand
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <p class="mt-6 text-sm text-white/40">Eerste 3 analyses gratis · geen account nodig</p>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 text-xs tracking-widest">SCROLL</div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="relative py-28 px-6">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="reveal text-center text-3xl sm:text-4xl font-extrabold tracking-tight">Alles wat je nodig hebt</h2>
+      <p class="reveal mx-auto mt-4 max-w-xl text-center text-white/55">Geen ruis. Geen drempels. Direct inzicht in waar jouw CV staat.</p>
+
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        <article class="feature-card card-glass rounded-2xl p-8 transition">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><path d="M3 13h4l3 7 4-16 3 9h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold">Directe match-score op basis van AI</h3>
+          <p class="mt-3 text-white/55">Een heldere score van 0 tot 100 die laat zien hoe goed jouw CV aansluit op de vacature.</p>
+        </article>
+
+        <article class="feature-card card-glass rounded-2xl p-8 transition">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-300">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold">Eerste 3 analyses gratis</h3>
+          <p class="mt-3 text-white/55">Probeer het zonder risico. Drie volledige analyses voordat je ook maar iets betaalt.</p>
+        </article>
+
+        <article class="feature-card card-glass rounded-2xl p-8 transition">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 text-accent-soft">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold">Geen account nodig</h3>
+          <p class="mt-3 text-white/55">Plak je CV en de vacature, krijg je score. Geen registratie, geen wachtwoorden.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOE HET WERKT -->
+  <section class="relative py-28 px-6 border-t border-white/5">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="reveal text-center text-3xl sm:text-4xl font-extrabold tracking-tight">Hoe het werkt</h2>
+      <p class="reveal mx-auto mt-4 max-w-xl text-center text-white/55">Van CV naar score in drie stappen.</p>
+
+      <div class="mt-16 grid gap-10 md:grid-cols-3">
+        <div class="step reveal text-center">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 text-xl font-bold text-accent-soft">1</div>
+          <h3 class="text-lg font-semibold">Plak je CV</h3>
+          <p class="mt-2 text-white/55">Kopieer de tekst van je CV in het scherm. Geen upload, geen gedoe.</p>
+        </div>
+        <div class="step reveal text-center">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 text-xl font-bold text-accent-soft">2</div>
+          <h3 class="text-lg font-semibold">Voeg de vacature toe</h3>
+          <p class="mt-2 text-white/55">Plak de vacaturetekst ernaast. De AI leest beide en vergelijkt ze.</p>
+        </div>
+        <div class="step reveal text-center">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 text-xl font-bold text-accent-soft">3</div>
+          <h3 class="text-lg font-semibold">Krijg je match-score</h3>
+          <p class="mt-2 text-white/55">Binnen seconden een score van 0 tot 100, met de punten die ertoe doen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="relative py-28 px-6 border-t border-white/5">
+    <div class="mx-auto max-w-md">
+      <h2 class="reveal text-center text-3xl sm:text-4xl font-extrabold tracking-tight">Eén plan. Alles erin.</h2>
+
+      <div class="reveal mt-12 card-glass rounded-3xl p-10 text-center">
+        <div class="flex items-end justify-center gap-1">
+          <span class="text-5xl font-extrabold">€19</span>
+          <span class="mb-2 text-white/50">/maand</span>
+        </div>
+        <p class="mt-3 text-white/55">Onbeperkte analyses. Opzegbaar wanneer je wilt.</p>
+
+        <ul class="mt-8 space-y-3 text-left text-sm text-white/70">
+          <li class="flex items-center gap-3"><span class="text-emerald-400">✓</span> Onbeperkte match-scores</li>
+          <li class="flex items-center gap-3"><span class="text-emerald-400">✓</span> AI-analyse op basis van de vacature</li>
+          <li class="flex items-center gap-3"><span class="text-emerald-400">✓</span> Eerste 3 analyses gratis</li>
+          <li class="flex items-center gap-3"><span class="text-emerald-400">✓</span> Geen account, geen verplichtingen</li>
+        </ul>
+
+        <a href="#" class="cta-btn mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-emerald-950 shadow-lg shadow-emerald-500/25 hover:bg-emerald-400 transition">
+          Start nu — €19/maand
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-10 px-6">
+    <div class="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+      <span class="font-extrabold tracking-tight text-white/70">CV<span class="text-accent-soft">Scanner</span></span>
+      <span>© 2026 CV Scanner · Gemaakt met AI</span>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Lenis smooth scroll
+    if (!reduceMotion && window.Lenis) {
+      const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      if (window.ScrollTrigger) {
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((t) => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+    }
+
+    if (window.gsap && !reduceMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // HERO — headline per woord, dan eyebrow + subtitel + CTA
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.from(".word", { y: 60, opacity: 0, duration: 0.9, stagger: 0.1 })
+        .from("#hero-eyebrow", { y: 20, opacity: 0, duration: 0.6 }, "-=0.8")
+        .from("#hero-sub", { y: 24, opacity: 0, duration: 0.8 }, "-=0.5")
+        .from("#hero-cta", { scale: 0.85, opacity: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4");
+
+      // CTA pulse
+      gsap.to(".cta-btn", { scale: 1.04, duration: 1.2, ease: "sine.inOut", repeat: -1, yoyo: true });
+
+      // FEATURES fade-up met stagger
+      gsap.from(".feature-card", {
+        scrollTrigger: { trigger: ".feature-card", start: "top 85%" },
+        y: 50, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out",
+      });
+
+      // STAPPEN staggered
+      gsap.from(".step", {
+        scrollTrigger: { trigger: ".step", start: "top 85%" },
+        y: 50, opacity: 0, duration: 0.8, stagger: 0.2, ease: "power3.out",
+      });
+
+      // Generieke reveal-elementen buiten de hero
+      gsap.utils.toArray(".reveal").forEach((el) => {
+        if (el.id && el.id.startsWith("hero-")) return; // hero al in de timeline
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 88%" },
+          y: 30, opacity: 0, duration: 0.7, ease: "power2.out",
+        });
+      });
+    }
+  </script>
 </body>
 </html>
